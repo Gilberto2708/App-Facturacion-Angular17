@@ -1,42 +1,21 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# Node.js modules
+node_modules/
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+# Angular build output
+dist/
+out-tsc/
 
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
+# Environment files (no subas información sensible)
+src/environments/*.ts
 
-# IDEs and editors
+# Editor and system files
+.vscode/
 .idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+*.log
+*.DS_Store
+*.tmp
+*.bak
+*.swp
 
-# Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
-
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-
-# System files
-.DS_Store
-Thumbs.db
+# Git y configuraciones
+.git/

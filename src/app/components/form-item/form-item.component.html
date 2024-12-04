@@ -1,0 +1,71 @@
+
+
+<div class="modal-header">
+  <h5 class="modal-title">{{isEditing ? 'Editar' : 'Agregar'}} Item</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<div class="modal-body p-4">
+  <form [formGroup]="itemForm" (ngSubmit)="addItem()">
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <label for="product" class="form-label">Producto</label>
+        <input
+          type="text"
+          id="product"
+          class="form-control form-control-lg"
+          placeholder="Nombre del producto"
+          formControlName="product"
+        />
+        <div *ngIf="itemForm.get('product')?.invalid && itemForm.get('product')?.touched"
+             class="text-danger mt-1 small">
+          El producto es obligatorio.
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label for="price" class="form-label">Precio</label>
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input
+            type="number"
+            id="price"
+            class="form-control form-control-lg"
+            placeholder="0.00"
+            formControlName="price"
+          />
+        </div>
+        <div *ngIf="itemForm.get('price')?.invalid && itemForm.get('price')?.touched"
+             class="text-danger mt-1 small">
+          El precio debe ser mayor a 0.
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="quantity" class="form-label">Cantidad</label>
+        <input
+          type="number"
+          id="quantity"
+          class="form-control form-control-lg"
+          placeholder="1"
+          formControlName="quantity"
+        />
+        <div *ngIf="itemForm.get('quantity')?.invalid && itemForm.get('quantity')?.touched"
+             class="text-danger mt-1 small">
+          La cantidad debe ser mayor a 0.
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+      <button type="button" class="btn btn-light btn-lg px-4" (click)="cancelForm()">
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-primary btn-lg px-4" [disabled]="itemForm.invalid">
+        {{isEditing ? 'Actualizar' : 'Agregar'}}
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,48 @@
+<div class="table-responsive" *ngIf="items.length > 0; else noItemsTemplate">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Producto</th>
+        <th class="text-end">Precio Unitario</th>
+        <th class="text-end">Cantidad</th>
+        <th class="text-end">Total</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.id }}</td>
+        <td>{{ item.product }}</td>
+        <td class="text-end">${{ item.price.toFixed(2) }}</td>
+        <td class="text-end">{{ item.quantity }}</td>
+        <td class="text-end">${{ (item.price * item.quantity).toFixed(2) }}</td>
+        <td class="text-end">
+          <button
+            class="btn btn-warning btn-sm me-2"
+            (click)="onEdit(item)"
+            data-bs-toggle="modal"
+            data-bs-target="#addItemModal"
+          >
+            <i class="bi bi-pencil"></i> Editar
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="deleteItem(item.id)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4" class="text-end"><strong>Total:</strong></td>
+        <td class="text-end">
+          <strong>${{ getTotalAmount().toFixed(2) }}</strong>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<ng-template #noItemsTemplate>
+  <div class="alert alert-info">No hay ítems en la factura</div>
+</ng-template>

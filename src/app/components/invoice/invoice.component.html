@@ -1,0 +1,73 @@
+<div class="container mt-4">
+  <!-- Botón para abrir el modal -->
+  <button
+  type="button"
+  class="btn btn-success mt-3 d-flex align-items-center gap-2"
+  data-bs-toggle="modal"
+  data-bs-target="#addItemModal"
+  (click)="onOpenAddModal()"
+>
+  <i class="bi bi-person-plus"></i>
+  Agregar Item
+</button>
+  <!-- Header -->
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+      <div class="row">
+        <div class="col-md-6">
+          <h2 class="mb-0">Factura #{{ invoice.id }}</h2>
+        </div>
+        <div class="col-md-6 text-end">
+          <h3>{{ invoice.company.name }}</h3>
+          <small>NIF: {{ invoice.company.fiscalNumber }}</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cliente Info -->
+    <div class="card-body">
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <h5 class="mb-3">Información del Cliente</h5>
+          <div>
+            <strong>Nombre:</strong> {{ invoice.client.name }}
+            {{ invoice.client.lastname }}
+          </div>
+          <div *ngFor="let addr of invoice.client.adress">
+            <strong>Dirección:</strong>
+            <div class="ms-3">
+              {{ addr.street }}<br />
+              {{ addr.city }}, {{ addr.country }}<br />
+              CP: {{ addr.zipCode }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 text-end">
+          <h5 class="mb-3">Detalles de Factura</h5>
+          <div><strong>Nombre:</strong> {{ invoice.name }}</div>
+        </div>
+      </div>
+
+      <!-- Items Table -->
+      <app-invoice-list
+      [items]="items"
+      (editItem)="onEditItem($event)">
+    </app-invoice-list>
+    </div>
+  </div>
+
+
+  <!-- !-- Modal -->
+  <div class="modal fade" id="addItemModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form-item
+          [items]="items"
+          [itemToEdit]="selectedItem"
+          (onSubmit)="onAddItem($event)"
+          (onCancel)="onCancelModal()">
+        </form-item>
+      </div>
+    </div>
+  </div>
+</div>
